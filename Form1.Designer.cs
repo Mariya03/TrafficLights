@@ -69,7 +69,7 @@
             this.Controls.Add(this.YellowLight);
             this.Controls.Add(this.RedLight);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Traffic Lights";
             ((System.ComponentModel.ISupportInitialize)(this.RedLight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.YellowLight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GreenLight)).EndInit();

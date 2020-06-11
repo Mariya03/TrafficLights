@@ -17,6 +17,8 @@ namespace TrafficLights
         private int timeCounter = 0;
         private Label labelTime = null;
         private int hou = 0, min = 0, sec = 0;
+       
+
       
         public Form1()
         {
@@ -74,6 +76,11 @@ namespace TrafficLights
             Switchlights();
             
         }
+
+        private void ResetClock()
+        {
+            sec = min = hou = 0;
+        }
         private void UpdateClock()
         {
             sec++;
@@ -87,15 +94,15 @@ namespace TrafficLights
                 hou++;
                 sec = 0;
             }
-            if(hou == 60)
+            if(hou == 24)
             {
-                hou = 0;
+                ResetClock();
             }
         }
 
         private void UpdateLabelTime()
         {
-            labelTime.Text = $"{hou.ToString("00")}:{min.ToString("00")}:{sec.ToString("00")}";
+            labelTime.Text = $"{hou:00}:{min:00}:{sec:00}";
         }
         private void Switchlights()
         {
