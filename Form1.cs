@@ -15,21 +15,38 @@ namespace TrafficLights
         private Timer timerSwitch = null;
         private Timer timerBlink = null;
         private int timeCounter = 0;
+        private Label labelTime = null;
+        private int hou = 0, min = 0, sec = 0;
       
         public Form1()
         {
             InitializeComponent();
             InitalizeTrafficLights();
+            InitializaLabelTime();
             InitializeTimerSwitch();
             InitializeTimerBlink();
         }
+
+        private void InitializaLabelTime()
+        {
+            labelTime = new Label();
+            labelTime.Font = new Font("Tahoma", 18, FontStyle.Bold);
+            labelTime.Width = 150;
+            labelTime.Height = 50;
+            labelTime.Top = 20;
+            labelTime.Left = 135;
+            labelTime.Text = "00:00:00";
+            this.Controls.Add(labelTime);
+            
+        }
+
+
         private void InitializeTimerSwitch()
         {
            timerSwitch = new Timer();
            timerSwitch.Interval = 1000;
            timerSwitch.Tick += new EventHandler(TimerSwitch_Tick);
            timerSwitch.Start();
-
         }
         private void InitializeTimerBlink()
         {
@@ -52,9 +69,34 @@ namespace TrafficLights
 
         private void TimerSwitch_Tick(object sender, EventArgs e)
         {
+            UpdateClock();
+            UpdateLabelTime();
             Switchlights();
+            
+        }
+        private void UpdateClock()
+        {
+            sec++;
+            if(sec == 60)
+            {
+                min++;
+                sec = 0;
+            }
+            if(min == 60)
+            {
+                hou++;
+                sec = 0;
+            }
+            if(hou == 60)
+            {
+                hou = 0;
+            }
         }
 
+        private void UpdateLabelTime()
+        {
+            labelTime.Text = $"{hou.ToString("00")}:{min.ToString("00")}:{sec.ToString("00")}";
+        }
         private void Switchlights()
         {
             switch (timeCounter)
